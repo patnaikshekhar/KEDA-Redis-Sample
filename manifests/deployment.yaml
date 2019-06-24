@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keda-redis-node
+  namespace: keda-redis-test
+spec:
+  selector:
+    matchLabels:
+      service: keda-redis-node
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        service: keda-redis-node
+    spec:
+      containers:
+      - image: patnaikshekhar/keda-redis-node:1
+        name: consumer
+        env:
+        - name: REDIS_HOST
+          value: redis-master.keda-redis-test.svc.cluster.local:6379
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: redis
+              key: redis-password
+        - name: LIST_NAME
+          value: mylist
+          
