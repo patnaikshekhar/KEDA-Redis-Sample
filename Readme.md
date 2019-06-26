@@ -9,7 +9,7 @@ You need a Kubernetes cluster with KEDA installed. The [KEDA git hub repository]
 
 You will also need to make sure that you are using the image tag: master
 ```sh
-helm upgrade keda-edge kedacore/keda-edge \
+helm upgrade keda kedacore/keda-edge \
   --devel \
   --set logLevel=debug \
   --set image.tag=master \
